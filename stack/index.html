@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="index.js"></script>
+    <script>
+        // stack = new Stack()
+        const convert = (decNumber, base) => {
+            const stack = new Stack()
+            let str = ''
+            while(decNumber > 0) {
+                stack.push(decNumber % base)
+                decNumber = Math.floor(decNumber/base)
+            }
+            while(!stack.isEmpty()) {
+                str += stack.pop()
+            }
+
+            return str
+        }
+
+        
+    </script>
+</body>
+</html>
