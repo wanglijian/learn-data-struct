@@ -26,3 +26,19 @@ class Stack {
     }
 }
 ```
+## 十进制转其他进制
+```
+const convert = (decNumber, base) => {
+    const stack = new Stack()
+    let str = ''
+    while(decNumber > 0) {
+        stack.push(decNumber % base)
+        decNumber = Math.floor(decNumber/base)
+    }
+    while(!stack.isEmpty()) {
+        str += stack.pop()
+    }
+
+    return str
+}
+```
