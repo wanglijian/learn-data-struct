@@ -67,3 +67,24 @@ class Queue {
     }
 }
 ```
+## 击鼓传花小游戏代码实现
+```
+function game(list, num) {
+    const queue = new Queue()
+    // 入队列
+    list.forEach(item => {
+        queue.enqueue(item)
+    })
+
+    while(queue.size() > 1) {
+        for(let i = 0; i < num; i++) {
+            queue.enqueue(queue.dequeue())
+        }
+        // console.log(queue.dequeue(), '淘汰了')
+        queue.dequeue()
+    }
+    return queue.dequeue()
+}
+const res = game(['kervin', 'tuichui', 'gangdaner', 'xiaoming', 'guludunzi'], 7)
+console.log(res, '赢了')
+```
