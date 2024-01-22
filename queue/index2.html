@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双端队列演示</title>
+</head>
+<body>
+    <script src="./dequeue.js"></script>
+    <script>
+        
+        const test = (str) => {
+            let lowStr = str.toLocaleLowerCase().split(' ').join('')
+            const dequeue = new DeQueue()
+            for(let i = 0;i < lowStr.length; i++) {
+                dequeue.addBack(lowStr[i])
+            }
+            let isEqual = true
+            while(dequeue.size() > 1) {
+                if(dequeue.removeBack() !== dequeue.removeFront()) {
+                    isEqual = false
+                    break
+                }
+            }
+            return isEqual
+        }
+        
+    </script>
+</body>
+</html>
