@@ -88,7 +88,7 @@ function game(list, num) {
 const res = game(['kervin', 'tuichui', 'gangdaner', 'xiaoming', 'guludunzi'], 7)
 console.log(res, '赢了')
 ```
-### 双端队列实现
+## 双端队列实现
 ```
 class DeQueue {
     // 双端队列
