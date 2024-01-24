@@ -141,3 +141,81 @@ const convert = (decNumber, base) => {
     return str
 }
 ```
+
+# 双向链表的实现
+```
+class DoublyNode extends Node {
+    constructor(element) {
+        super(element)
+        this.prev = null
+    }
+}
+// 双向链表
+class DoublyLinkedList extends LinkedList {
+    constructor() {
+        super()
+        this.tail = null
+    }
+    push(element) {
+        let node = new DoublyNode(element)
+        if(this.head === null) {
+            this.head = node
+            this.tail = node
+        } else {
+            this.tail.next = node
+            node.prev = this.tail
+            this.tail = node
+        }
+        this.count++
+    }
+    insert(element, index) {
+        if(index < 0 || index > this.count) return false
+        let node = new DoublyNode(element)
+        if(index === 0) {
+            if(this.head === null) {
+                this.head = node
+                this.tail = node
+            } else {
+                node.next = this.head
+                this.head.prev = node
+                this.head = node
+            }
+        } else if(index === this.count) {
+            this.tail.next = node
+            node.prev = this.tail
+            this.tail = node
+        } else {
+            let previous = this.getNodeAt(index - 1)
+            let current = previous.next
+            node.next = current
+            current.prev = node
+            previous.next = node
+            node.prev = previous
+        }
+        this.count++
+    }
+    removeAt2(index) {
+        if(index < 0 || index >= this.count) return
+        let current = this.head
+        if(index === 0) {
+            this.head = current.next
+            if(this.count === 1) {
+                this.tail = null
+            } else {
+                current.next.prev = null
+            }
+        } else if(index === this.count - 1) {
+            current = this.tail
+            current.prev.next = null
+            this.tail = current.prev
+        } else {
+            let previous = this.getNodeAt(index - 1)
+            current = previous.next
+            previous.next = current.next
+            current.next.prev = previous
+        }
+        this.count--
+        return current.element
+    }
+}
+```
