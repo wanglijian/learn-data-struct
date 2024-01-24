@@ -84,4 +84,26 @@ class LinkedList {
         let index = this.indexOf(element)
         return this.removeAt2(index)
     }
+    insert(index, element) {
+        if(index < 0 || index > this.count) return false
+        const node = new Node(element)
+        if(index === 0) {
+            let head = this.head
+            node.next = head
+            this.head = node
+        } else {
+            let previous = this.getNodeAt(index - 1)
+            let current = previous.next
+            previous.next = node
+            node.next = current
+        }
+        this.count ++
+        return true
+    }
+    isEmpty() {
+        return this.size() === 0
+    }
+    size() {
+        return this.count
+    }
 }

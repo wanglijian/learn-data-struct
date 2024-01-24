@@ -8,8 +8,60 @@
 <body>
     <script src="./index.js"></script>
     <script>
-        let linkList = new LinkedList()
-        
+        // let linkList = new LinkedList()
+
+    </script>
+    <script>
+        // 使用链表实现回文检测功能
+        const test = (str) => {
+            let lowStr = str.toLocaleLowerCase().split(' ').join('')
+            const dequeue = new LinkedList()
+            for(let i = 0;i < lowStr.length; i++) {
+                dequeue.push(lowStr[i])
+            }
+            let isEqual = true
+            while(dequeue.size() > 1) {
+                if(dequeue.removeAt2(dequeue.size() - 1) !== dequeue.removeAt2(0)) {
+                    isEqual = false
+                    break
+                }
+            }
+            return isEqual
+        }
+    </script>
+    <script>
+        // 使用单链表实现击鼓传花
+        function game(list, num) {
+            const queue = new LinkedList()
+            // 入队列
+            list.forEach(item => {
+                queue.push(item)
+            })
+
+            while(queue.size() > 1) {
+                for(let i = 0; i < num; i++) {
+                    queue.push(queue.removeAt2(0))
+                }
+                // console.log(queue.dequeue(), '淘汰了')
+                queue.removeAt2(0)
+            }
+            return queue.removeAt2(0)
+        }
+    </script>
+    <script>
+        const convert = (decNumber, base) => {
+            const stack = new LinkedList()
+            let str = ''
+            while(decNumber > 0) {
+                stack.push(decNumber % base)
+                decNumber = Math.floor(decNumber/base)
+            }
+            while(!stack.isEmpty()) {
+                str += stack.removeAt2(stack.size() - 1)
+            }
+
+            return str
+        }
     </script>
 </body>
 </html>
