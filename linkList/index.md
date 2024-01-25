@@ -219,3 +219,65 @@ class DoublyLinkedList extends LinkedList {
     }
 }
 ```
+# 循环链表
+```
+class CirularLinkedList extends LinkedList {
+    constructor() {
+        super()
+    }
+    push(element) {
+        let node = new Node(element)
+        let current = this.head
+        if(this.head === null) {
+            this.head = node
+        } else {
+            current = this.getNodeAt(this.count - 1)
+            current.next = node
+        }
+        node.next = this.head
+        this.count++
+    }
+    insert(element, index) {
+        if(index < 0 || index > this.count) return false
+        let node = new Node(element)
+        let current = this.head
+        if(index === 0) {
+            if(this.head === null) {
+                this.head = node
+                node.next = this.head
+            } else {
+                node.next = this.head
+                // 此处步骤位置比较关键
+                let lastNode = this.getNodeAt(this.size() - 1)
+                this.head = node
+                lastNode.next = this.head
+            }
+        } else {
+            let previous = this.getNodeAt(index - 1)
+            node.next = previous.next
+            previous.next = node
+        }
+        this.count ++
+        return true
+    }
+    removeAt(index){
+        if(index < 0 || index >= this.count) return
+        let current = this.head
+        if(index === 0) {
+            if(this.size() === 1) {
+                this.head = null
+            } else {
+                let last = this.getNodeAt(this.size() - 1)
+                this.head = this.head.next
+                last.next = this.head
+            }
+        } else {
+            let previous = this.getNodeAt(index - 1)
+            current = previous.next
+            previous.next = current.next
+        }
+        this.count --
+        return current.element
+    }
+}
+```
